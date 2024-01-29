@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>熊猫背单词</title>
+  <script>
+    document.querySelector('html').style.fontSize = window.innerWidth / 37.5 + 'px';
+
+    document.addEventListener('plusready', () => {
+      let first = null;
+      plus.key.addEventListener('backbutton', () => {
+        if (!first) {
+          first = new Date().getTime();
+          const urls = location.hash.split('/')[1];
+          if (urls === "NewD" || urls === "StartScan") { plus.runtime.quit(); }
+          else { window.history.back(); }
+          setTimeout(() => { first = null; }, 1000);
+        } else { if (new Date().getTime() - first < 500) { plus.runtime.quit(); } }
+      });
+    });
+
+    const plusReady = () => { plus.navigator.setStatusBarBackground('#ffffff'); };
+    if (window.plus) { plusReady(); }
+    else { document.addEventListener('plusready', plusReady, false); };
+  </script>
+  <script type="module" crossorigin src="./assets/index-aCseD8ox.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-jTWaRptl.css">
+</head>
+
+<body>
+  <div id="app"></div>
+  <div class="app"></div>
+</body>
+
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  html {
+    font-size: 10px;
+    background-color: white;
+  }
+
+  .app {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: linear-gradient(white, #9ff5ff);
+    top: 0;
+    z-index: -1;
+  }
+</style>
+
+</html>
