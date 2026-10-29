@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>熊猫编辑器</title>
+	<meta name="description" content="熊猫编辑器（PandaEditor）是专为 CnLang 编程语言打造的中文集成开发环境，内置 Python 运行时，支持语法高亮、智能补全、一键运行与打包 exe，附带 425 块中文积木。">
+	<meta name="theme-color" content="#141518">
+	<meta property="og:title" content="熊猫编辑器">
+	<meta property="og:description" content="专为 CnLang 打造的中文 IDE，开箱即用。">
+	<meta property="og:type" content="website">
+	<link rel="icon" href="./image/favicon.svg">
+	<noscript>
+		<style>
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+		</style>
+	</noscript>
+	<style>
+        :root {
+            --bg: #141518;
+            --bg-soft: #191b1f;
+            --panel: #1e2024;
+            --panel-2: #24272c;
+            --line: #2c3037;
+            --line-soft: #23262b;
+            --fg: #e9eaec;
+            --dim: #9aa1aa;
+            --dim-2: #6f7680;
+            --accent: #569cde;
+            --accent-2: #7bb8ec;
+            --accent-soft: rgba(86, 156, 222, .13);
+            --green: #7bc96f;
+            --amber: #e2b04a;
+            --purple: #c586c0;
+            --str: #ce9178;
+            --comment: #6a9955;
+            --radius: 14px;
+            --font: "Segoe UI", "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+            --mono: "Cascadia Code", "Consolas", "Sarasa Mono SC", "Microsoft YaHei", monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--fg);
+            font-family: var(--font);
+            font-size: 16px;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .wrap {
+            width: 100%;
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(20, 21, 24, .72);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid transparent;
+            transition: border-color .2s ease, background .2s ease;
+        }
+
+        .nav.is-scrolled {
+            border-bottom-color: var(--line-soft);
+            background: rgba(20, 21, 24, .92);
+        }
+
+        .nav-inner {
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 26px;
+            font-weight: 500;
+            letter-spacing: .2px;
+        }
+
+        .brand span {
+            display: flex;
+            align-items: center;
+        }
+
+        .brand img {
+            flex: none;
+            margin-right: 5px;
+            width: 25px;
+            height: 25px;
+        }
+
+        .links {
+            display: flex;
+            align-items: center;
+            gap: 26px;
+            font-size: 14px;
+            color: var(--dim);
+        }
+
+        .links a {
+            transition: color .15s ease;
+        }
+
+        .links a:hover {
+            color: var(--fg);
+        }
+
+        .gh {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 7px 14px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            color: var(--fg);
+            font-size: 14px;
+            transition: border-color .15s ease, background .15s ease;
+        }
+
+        .gh:hover {
+            border-color: var(--dim-2);
+            background: var(--panel);
+        }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 84px 0 72px;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: -30% 0 auto 0;
+            height: 720px;
+            background: radial-gradient(60% 60% at 22% 30%, rgba(86, 156, 222, .16), transparent 70%),
+            radial-gradient(45% 55% at 82% 18%, rgba(123, 201, 111, .10), transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(var(--line-soft) 1px, transparent 1px),
+            linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+            background-size: 64px 64px;
+            mask-image: radial-gradient(70% 60% at 50% 30%, #000 20%, transparent 80%);
+            opacity: .35;
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1.02fr 1.18fr;
+            gap: 56px;
+            align-items: center;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0 0 20px;
+            padding: 5px 12px;
+            border: 1px solid var(--line);
+            border-radius: 100px;
+            background: var(--panel);
+            color: var(--dim);
+            font-size: 13px;
+        }
+
+        .eyebrow i {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 0 0 3px rgba(123, 201, 111, .18);
+        }
+
+        h1 {
+            margin: 0 0 20px;
+            font-size: 54px;
+            line-height: 1.14;
+            font-weight: 600;
+            letter-spacing: -.5px;
+        }
+
+        h1 .hl {
+            background: linear-gradient(120deg, var(--accent-2), var(--green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .lead {
+            margin: 0 0 30px;
+            max-width: 30em;
+            color: var(--dim);
+            font-size: 17px;
+        }
+
+        .cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 26px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 22px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 500;
+            border: 1px solid transparent;
+            transition: transform .12s ease, background .15s ease, border-color .15s ease;
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .btn.primary {
+            background: var(--accent);
+            color: #0b1016;
+        }
+
+        .btn.primary:hover {
+            background: var(--accent-2);
+        }
+
+        .btn.ghost {
+            border-color: var(--line);
+            color: var(--fg);
+            background: var(--panel);
+        }
+
+        .btn.ghost:hover {
+            border-color: var(--dim-2);
+            background: var(--panel-2);
+        }
+
+        .meta-line {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            color: var(--dim-2);
+            font-size: 13px;
+        }
+
+        .meta-line li + li::before {
+            content: "·";
+            margin-right: 8px;
+            color: var(--line);
+        }
+
+        .window {
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: var(--panel);
+            box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .7);
+            overflow: hidden;
+            font-family: var(--mono);
+        }
+
+        .titlebar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            height: 40px;
+            padding: 0 14px;
+            background: var(--panel-2);
+            border-bottom: 1px solid var(--line-soft);
+        }
+
+        .dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .dots i {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #3a3f47;
+        }
+
+        .tab {
+            padding: 4px 12px;
+            border-radius: 6px 6px 0 0;
+            background: var(--panel);
+            color: var(--dim);
+            font-size: 12px;
+            border: 1px solid var(--line-soft);
+            border-bottom: none;
+        }
+
+        .editor {
+            display: grid;
+            grid-template-columns: 42px 1fr;
+            padding: 18px 0;
+            font-size: 13.5px;
+            line-height: 1.9;
+        }
+
+        .gutter {
+            padding-right: 12px;
+            text-align: right;
+            color: #4a505a;
+            user-select: none;
+        }
+
+        .code {
+            margin: 0;
+            padding: 0 18px 0 8px;
+            overflow-x: auto;
+            white-space: pre;
+            color: #d4d4d4;
+        }
+
+        .code .kw {
+            color: var(--purple);
+        }
+
+        .code .fn {
+            color: #dcdcaa;
+        }
+
+        .code .str {
+            color: var(--str);
+        }
+
+        .code .num {
+            color: #b5cea8;
+        }
+
+        .code .cm {
+            color: var(--comment);
+        }
+
+        .code .op {
+            color: #d4d4d4;
+        }
+
+        .statusbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            padding: 7px 14px;
+            border-top: 1px solid var(--line-soft);
+            background: var(--panel-2);
+            color: var(--dim-2);
+            font-size: 11.5px;
+        }
+
+        .stats {
+            border-top: 1px solid var(--line-soft);
+            border-bottom: 1px solid var(--line-soft);
+            background: var(--bg-soft);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+        }
+
+        .stat {
+            padding: 30px 8px;
+            text-align: center;
+        }
+
+        .stat b {
+            display: block;
+            font-size: 30px;
+            font-weight: 600;
+            letter-spacing: -.5px;
+            color: var(--fg);
+        }
+
+        .stat span {
+            color: var(--dim-2);
+            font-size: 13px;
+        }
+
+        section {
+            position: relative;
+        }
+
+        .section {
+            padding: 88px 0;
+        }
+
+        .section-head {
+            max-width: 620px;
+            margin-bottom: 46px;
+        }
+
+        .section-head h2 {
+            margin: 0 0 12px;
+            font-size: 32px;
+            font-weight: 600;
+            letter-spacing: -.3px;
+        }
+
+        .section-head p {
+            margin: 0;
+            color: var(--dim);
+            font-size: 16px;
+        }
+
+        .kicker {
+            display: block;
+            margin-bottom: 12px;
+            color: var(--accent);
+            font-size: 13px;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .card {
+            padding: 26px 24px;
+            border: 1px solid var(--line-soft);
+            border-radius: var(--radius);
+            background: var(--panel);
+            transition: border-color .18s ease, transform .18s ease, background .18s ease;
+        }
+
+        .card:hover {
+            border-color: #3a4048;
+            background: var(--panel-2);
+            transform: translateY(-2px);
+        }
+
+        .card .ico {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            margin-bottom: 16px;
+            border-radius: 10px;
+            background: var(--accent-soft);
+            color: var(--accent-2);
+        }
+
+        .card h3 {
+            margin: 0 0 8px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .card p {
+            margin: 0;
+            color: var(--dim);
+            font-size: 14px;
+            line-height: 1.65;
+        }
+
+        .blocks {
+            display: grid;
+            grid-template-columns: .95fr 1.05fr;
+            gap: 56px;
+            align-items: center;
+        }
+
+        .block-stage {
+            padding: 28px;
+            border: 1px solid var(--line-soft);
+            border-radius: var(--radius);
+            background: radial-gradient(70% 70% at 20% 10%, rgba(86, 156, 222, .09), transparent 60%),
+            var(--bg-soft);
+        }
+
+        .piece {
+            position: relative;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            width: fit-content;
+            margin-bottom: 10px;
+            padding: 10px 16px;
+            border-radius: 7px;
+            font-family: var(--mono);
+            font-size: 13.5px;
+            color: #0d1117;
+            font-weight: 500;
+            box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .16), inset 0 1px 0 rgba(255, 255, 255, .22);
+        }
+
+        .piece.blue {
+            background: #6aa6da;
+        }
+
+        .piece.amber {
+            background: var(--amber);
+        }
+
+        .piece.green {
+            background: #86c97a;
+        }
+
+        .piece.lvl1 {
+            margin-left: 26px;
+        }
+
+        .piece.lvl2 {
+            margin-left: 52px;
+        }
+
+        .slot {
+            padding: 3px 9px;
+            border-radius: 5px;
+            background: rgba(13, 17, 23, .18);
+            color: #0d1117;
+            font-weight: 400;
+        }
+
+        .slot.light {
+            background: rgba(255, 255, 255, .8);
+            color: #1a1c20;
+        }
+
+        .blocks-note {
+            margin: 20px 0 0;
+            color: var(--dim-2);
+            font-size: 13px;
+        }
+
+        .compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .pane {
+            border: 1px solid var(--line-soft);
+            border-radius: var(--radius);
+            background: var(--panel);
+            overflow: hidden;
+        }
+
+        .pane header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 11px 16px;
+            border-bottom: 1px solid var(--line-soft);
+            color: var(--dim);
+            font-size: 13px;
+        }
+
+        .pane header em {
+            font-style: normal;
+            color: var(--dim-2);
+            font-size: 12px;
+        }
+
+        .pane pre {
+            margin: 0;
+            padding: 18px;
+            overflow-x: auto;
+            font-family: var(--mono);
+            font-size: 13.5px;
+            line-height: 1.9;
+            color: #d4d4d4;
+        }
+
+        .dl {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .dl-card {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding: 30px 28px;
+            border: 1px solid var(--line-soft);
+            border-radius: var(--radius);
+            background: var(--panel);
+            transition: border-color .18s ease, transform .18s ease;
+        }
+
+        .dl-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .dl-card .tag {
+            color: var(--dim-2);
+            font-size: 12.5px;
+            letter-spacing: .4px;
+        }
+
+        .dl-card strong {
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        .dl-card p {
+            margin: 0;
+            color: var(--dim);
+            font-size: 14px;
+        }
+
+        .dl-card .go {
+            margin-top: 14px;
+            color: var(--accent-2);
+            font-size: 14px;
+        }
+
+        footer {
+            padding: 46px 0 54px;
+            border-top: 1px solid var(--line-soft);
+            background: var(--bg-soft);
+            color: var(--dim-2);
+            font-size: 13.5px;
+        }
+
+        .foot-top {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            margin-bottom: 22px;
+        }
+
+        .foot-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 22px;
+        }
+
+        .foot-links a:hover {
+            color: var(--fg);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(14px);
+            transition: opacity .5s ease, transform .5s ease;
+        }
+
+        .reveal.is-in {
+            opacity: 1;
+            transform: none;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+
+            .card, .dl-card, .btn {
+                transition: none;
+            }
+        }
+
+        @media (max-width: 960px) {
+            .hero {
+                padding: 60px 0 52px;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            h1 {
+                font-size: 42px;
+            }
+
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .blocks {
+                grid-template-columns: 1fr;
+                gap: 36px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .section {
+                padding: 68px 0;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .wrap {
+                padding: 0 18px;
+            }
+
+            .links {
+                display: none;
+            }
+
+            h1 {
+                font-size: 34px;
+            }
+
+            .lead {
+                font-size: 15.5px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .compare {
+                grid-template-columns: 1fr;
+            }
+
+            .dl {
+                grid-template-columns: 1fr;
+            }
+
+            .section-head h2 {
+                font-size: 25px;
+            }
+
+            .editor {
+                font-size: 12.5px;
+            }
+
+            .stat b {
+                font-size: 25px;
+            }
+        }
+	</style>
+</head>
+<body id="top">
+	<header class="nav" id="nav">
+		<div class="wrap nav-inner">
+			<div class="brand" href="#top">
+				<span>
+					<img src="./image/logo.svg" alt="logo">
+					熊猫编辑器
+				</span>
+				
+				<nav class="links" aria-label="主导航">
+					<a href="#features">功能</a>
+					<a href="#blocks">积木</a>
+					<a href="#compare">语法</a>
+					<a href="#download">下载</a>
+					<a href="./docs/USAGE.html">文档</a>
+				</nav>
+			</div>
+			
+			<a class="gh" href="https://github.com/cxfjh/panda-editor" target="_blank" rel="noopener">
+				<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+					<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.4 7.4 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
+				</svg>
+				GitHub
+			</a>
+		</div>
+	</header>
+	
+	<main>
+		<section class="hero">
+			<div class="wrap hero-grid">
+				<div class="hero-copy">
+					<p class="eyebrow"><i></i> CnLang · 中文编程语言 IDE</p>
+					<h1><span class="hl">用中文写代码</span></h1>
+					<p class="lead">关键字、数据结构、函数定义，全部用中文书写。熊猫编辑器把编辑器、终端、编译器和积木编程装进一个窗口。</p>
+					<div class="cta">
+						<a class="btn primary" href="#download">
+							下载 v0.1.0
+							<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+								<path d="M8 2v8M4.5 7 8 10.5 11.5 7M3 13h10"/>
+							</svg>
+						</a>
+						<a class="btn ghost" href="./docs/USAGE.html">查看教程</a>
+					</div>
+					<ul class="meta-line">
+						<li>Windows</li>
+						<li>内置 Python 运行时</li>
+						<li>GPL-3.0</li>
+						<li>免费开源</li>
+					</ul>
+				</div>
+				
+				<div class="window" role="img" aria-label="熊猫编辑器中的中文代码示例">
+					<div class="titlebar">
+						<span class="dots"><i></i><i></i><i></i></span>
+						<span class="tab">code.cn</span>
+					</div>
+					<div class="editor">
+						<div class="gutter">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11</div>
+						<pre class="code"><span class="cm"># 定义函数，计算问候语</span>
+<span class="kw">定义</span> <span class="fn">问候</span><span class="op">（</span>名字<span class="op">）：</span>
+    <span class="kw">返回</span> <span class="str">"你好，"</span> <span class="op">+</span> 名字 <span class="op">+</span> <span class="str">"！"</span>
+
+<span class="cm"># 列表与遍历</span>
+水果 <span class="op">=</span> <span class="op">【</span><span class="str">"苹果"</span><span class="op">,</span> <span class="str">"香蕉"</span><span class="op">,</span> <span class="str">"橙子"</span><span class="op">】</span>
+
+<span class="kw">遍历</span> 水果名 <span class="kw">在</span> 水果<span class="op">：</span>
+    <span class="kw">如果</span> <span class="fn">长度*</span><span class="op">（</span>水果名<span class="op">）</span> <span class="op">&gt;</span> <span class="num">2</span><span class="op">：</span>
+        <span class="fn">输出*</span><span class="op">（</span><span class="fn">问候</span><span class="op">（</span>水果名<span class="op">））</span></pre>
+					</div>
+					<div class="statusbar">
+						<span>行号: 11</span>
+						<span>文件: code.cn</span>
+						<span>版本: v0.1.0</span>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<section class="stats">
+			<div class="wrap stats-grid">
+				<div class="stat"><b>425</b><span>块中文积木</span></div>
+				<div class="stat"><b>21</b><span>类函数库</span></div>
+				<div class="stat"><b>12</b><span>个标签页上限</span></div>
+				<div class="stat"><b>0</b><span>额外环境配置</span></div>
+			</div>
+		</section>
+		
+		<section class="section" id="features">
+			<div class="wrap">
+				<div class="section-head reveal">
+					<span class="kicker">Features</span>
+					<h2>一个窗口，写、跑、打包</h2>
+					<p>不用在编辑器、命令行、打包工具之间来回切换。</p>
+				</div>
+				
+				<div class="features">
+					<article class="card reveal">
+			            <span class="ico">
+			                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+			                    <path d="m8 6-5 6 5 6M16 6l5 6-5 6M13 4l-2 16"/>
+			                </svg>
+			            </span>
+						<h3>中文语法高亮与补全</h3>
+						<p>关键字、字符串、注释完整着色；输入时按上下文提示变量、函数和库操作。</p>
+					</article>
+					
+					<article class="card reveal">
+			            <span class="ico">
+			                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+			                    <path d="M7 4v16l13-8-13-8Z"/>
+			                </svg>
+			            </span>
+						<h3>一键运行</h3>
+						<p>点一下就跑，可选在终端内运行或弹出独立窗口。出错时用中文说明原因并定位到代码行。</p>
+					</article>
+					
+					<article class="card reveal">
+			            <span class="ico">
+			                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+			                    <path d="M3 6h18M3 6v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6M8 3v3M16 3v3"/>
+			                </svg>
+			            </span>
+						<h3>打包成 exe</h3>
+						<p>内置打包流程，支持单文件或目录两种产物，可自定义图标、隐藏控制台、申请管理员权限。</p>
+					</article>
+					
+					<article class="card reveal">
+			            <span class="ico">
+			                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+			                    <rect x="3" y="3" width="7" height="7" rx="1.5"/>
+			                    <rect x="14" y="3" width="7" height="7" rx="1.5"/>
+			                    <rect x="3" y="14" width="7" height="7" rx="1.5"/>
+			                    <path d="M14 17.5h7M17.5 14v7"/>
+			                </svg>
+                    </span>
+						<h3>积木编程</h3>
+						<p>425 块中文积木，拖拽拼装后一键生成代码写入 .cn 文件，适合入门教学，也适合快速搭结构。</p>
+					</article>
+					
+					<article class="card reveal">
+			            <span class="ico">
+			                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+			                    <path d="M4 5h7l2 2h7v12H4V5Z"/>
+			                </svg>
+                        </span>
+						<h3>文件树与多标签</h3>
+						<p>左侧文件树浏览项目，双击即开；多标签并行编辑，退出时自动记住打开的文件。</p>
+					</article>
+					
+					<article class="card reveal">
+			            <span class="ico">
+			                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+			                    <path d="M8 9h8M8 13h5"/>
+			                    <rect x="3" y="4" width="18" height="16" rx="2.5"/>
+			                </svg>
+			            </span>
+						<h3>内嵌终端</h3>
+						<p>命令历史翻页、目录切换、屏幕清空，也能直接把编辑器里的代码丢进去执行。</p>
+					</article>
+				</div>
+			</div>
+		</section>
+		
+		<section class="section" id="blocks" style="background: var(--bg-soft); border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft);">
+			<div class="wrap blocks">
+				<div class="reveal">
+					<span class="kicker">Blocks</span>
+					<h2 style="margin: 0 0 14px; font-size: 32px; font-weight: 600; letter-spacing: -.3px;">不会写就先拼</h2>
+					<p style="margin: 0 0 20px; color: var(--dim);">9 类基础语法、12 类中文函数库、9 类内置扩展库，拼好之后一键转成 CnLang 代码，写进你指定的文件。生成前不会覆盖已有内容，除非你确认。</p>
+					<ul style="margin: 0; padding: 0; list-style: none; color: var(--dim); font-size: 14.5px; line-height: 2;">
+						<li>· 积木工作区可另存为 XML，下次自动恢复</li>
+						<li>· 支持覆盖或追加两种写入方式</li>
+						<li>· 积木区宽度可拖动，也能整体隐藏</li>
+					</ul>
+				</div>
+				
+				<div class="block-stage reveal">
+					<div class="piece blue">
+						输出*<span class="slot light">"你好，世界！"</span>
+					</div>
+					<div class="piece green">
+						遍历<span class="slot light">水果名</span>在<span class="slot light">水果</span>
+					</div>
+					<div class="piece amber lvl1">
+						如果<span class="slot">长度*（水果名） &gt; 2</span>那么
+					</div>
+					<div class="piece blue lvl2">
+						输出*<span class="slot light">问候（水果名）</span>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<section class="section" id="compare">
+			<div class="wrap">
+				<div class="section-head reveal">
+					<span class="kicker">Syntax</span>
+					<h2>中文写法，Python 内核</h2>
+					<p>代码最终编译成标准 Python 执行，既能用中文表达，也能用上完整的 Python 生态。</p>
+				</div>
+				
+				<div class="compare reveal">
+					<div class="pane">
+						<header><span>code.cn</span><em>CnLang</em></header>
+						<pre>水果 <span class="op">=</span> <span class="op">【</span><span class="str">"苹果"</span><span class="op">,</span> <span class="str">"香蕉"</span><span class="op">,</span> <span class="str">"橙子"</span><span class="op">】</span>
+
+<span class="kw">遍历</span> 水果名 <span class="kw">在</span> 水果<span class="op">：</span>
+    <span class="kw">如果</span> <span class="fn">长度*</span><span class="op">（</span>水果名<span class="op">）</span> <span class="op">&gt;</span> <span class="num">2</span><span class="op">：</span>
+        <span class="fn">输出*</span><span class="op">（</span>水果名<span class="op">）</span></pre>
+					</div>
+					
+					<div class="pane">
+						<header><span>code.py</span><em>Python</em></header>
+						<pre>fruits <span class="op">=</span> <span class="op">[</span><span class="str">"苹果"</span><span class="op">,</span> <span class="str">"香蕉"</span><span class="op">,</span> <span class="str">"橙子"</span><span class="op">]</span>
+
+<span class="kw">for</span> fruit <span class="kw">in</span> fruits<span class="op">:</span>
+    <span class="kw">if</span> <span class="fn">len</span><span class="op">(</span>fruit<span class="op">)</span> <span class="op">&gt;</span> <span class="num">2</span><span class="op">:</span>
+        <span class="fn">print</span><span class="op">(</span>fruit<span class="op">)</span></pre>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<section class="section" id="download" style="background: var(--bg-soft); border-top: 1px solid var(--line-soft);">
+			<div class="wrap">
+				<div class="section-head reveal">
+					<span class="kicker">Download</span>
+					<h2>下载 v0.1.0</h2>
+					<p>内置 Python 运行时，解压即用，无需单独安装环境。</p>
+				</div>
+				
+				<div class="dl reveal">
+					<a class="dl-card" href="https://github.com/cxfjh/panda-editor/releases/tag/v0.1.0" target="_blank" rel="noopener">
+						<span class="tag">推荐 · 完整源码与安装包</span>
+						<strong>Github Releases</strong>
+						<p>版本更新最快，可查看变更记录与历史版本。</p>
+						<span class="go">前往下载 →</span>
+					</a>
+					
+					<a class="dl-card" href="https://1825984093.share.123pan.cn/123pan/IzrNjv-xto5A" target="_blank" rel="noopener">
+						<span class="tag">国内加速</span>
+						<strong>123 云盘</strong>
+						<p>Github 访问较慢时使用，内容与 Releases 一致。</p>
+						<span class="go">前往下载 →</span>
+					</a>
+				</div>
+			</div>
+		</section>
+	</main>
+	
+	<footer>
+		<div class="wrap">
+			<div class="foot-top">
+				<div class="brand" style="font-size: 14px; gap: 0">
+					<img src="./image/logo.svg" alt="logo">
+					<span>熊猫编辑器 PandaEditor</span>
+				</div>
+				<nav class="foot-links" aria-label="页脚导航">
+					<a href="./docs/USAGE.html">使用教程</a>
+					<a href="./docs/CHANGELOG.html">更新日志</a>
+					<a href="https://github.com/cxfjh/panda-editor" target="_blank" rel="noopener">Github</a>
+					<a href="mailto:2449579731@qq.com">联系作者【2449579731@qq.com】</a>
+				</nav>
+			</div>
+		</div>
+	</footer>
+	
+	<script>
+        (() => {
+            const nav = document.getElementById("nav");
+            const onScroll = () => {
+                if (window.scrollY > 8) nav.classList.add("is-scrolled");
+                else nav.classList.remove("is-scrolled");
+            };
+            
+            onScroll();
+            window.addEventListener("scroll", onScroll, { passive: true });
+            
+            const items = document.querySelectorAll(".reveal");
+            if (!("IntersectionObserver" in window)) {
+                items.forEach((el) => el.classList.add("is-in"));
+                return;
+            }
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("is-in");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { rootMargin: "0px 0px -8% 0px", threshold: 0.12 });
+            
+            items.forEach((el) => observer.observe(el));
+        })();
+	</script>
+
+</body>
+</html>

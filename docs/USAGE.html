@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>CnLang 编程语言教程</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="markdown-body">
+		<h1>CnLang 编程语言教程</h1>
+		<h2>简介</h2>
+		<p>CnLang 是一门面向中文开发者的编程语言，文件后缀为 <code>.cn</code>。它使用中文关键字、中文标点和中文函数名，让开发者能够用母语编写程序。</p>
+		<h2>快速开始</h2>
+		<h3>第一个程序</h3>
+		<pre><code class="language-cn">输出*（&quot;你好，世界！&quot;）
+</code></pre>
+		<h3>变量</h3>
+		<pre><code class="language-cn">姓名 = &quot;张三&quot;
+年龄 = 25
+身高 = 1.75
+输出*（姓名，年龄，身高）
+</code></pre>
+		<h2>数据类型</h2>
+		<h3>数字</h3>
+		<pre><code class="language-cn">整数 = 10
+负数 = -5
+小数 = 3.14
+输出*（整数 + 负数）
+输出*（小数 * 2）
+</code></pre>
+		<h3>字符串</h3>
+		<pre><code class="language-cn">问候 = &quot;你好&quot;
+名字 = &#39;李四&#39;
+输出*（问候 + 名字）
+输出*（&quot;长度：&quot; + 长度*（问候））
+</code></pre>
+		<h3>布尔值</h3>
+		<pre><code class="language-cn">是真 = 真
+是假 = 假
+输出*（是真 且 是假）
+输出*（是真 或 是假）
+输出*（非 是真）
+</code></pre>
+		<h3>列表</h3>
+		<pre><code class="language-cn">数字列表 = 【1, 2, 3, 4, 5】
+水果 = 【&quot;苹果&quot;, &quot;香蕉&quot;, &quot;橙子&quot;】
+输出*（数字列表）
+输出*（水果【0】）
+输出*（长度*（水果））
+</code></pre>
+		<h3>字典</h3>
+		<pre><code class="language-cn">学生 = ｛&quot;姓名&quot;: &quot;王五&quot;, &quot;年龄&quot;: 20, &quot;成绩&quot;: 95｝
+输出*（学生【&quot;姓名&quot;】）
+输出*（学生.获取（&quot;年龄&quot;））
+</code></pre>
+		<h3>元组</h3>
+		<pre><code class="language-cn">坐标 = （10, 20）
+输出*（坐标【0】）
+输出*（坐标【1】）
+</code></pre>
+		<h3>集合</h3>
+		<pre><code class="language-cn">数字集合 = ｛1, 2, 3, 3, 4｝
+输出*（数字集合）
+</code></pre>
+		<h2>运算符</h2>
+		<h3>算术运算符</h3>
+		<pre><code class="language-cn">输出*（10 + 5）   # 加法
+输出*（10 - 5）   # 减法
+输出*（10 * 5）   # 乘法
+输出*（10 / 5）   # 除法
+输出*（10 // 5）  # 整除
+输出*（10 % 3）   # 取余
+输出*（2 ** 3）   # 幂运算
+</code></pre>
+		<h3>比较运算符</h3>
+		<pre><code class="language-cn">输出*（10 &gt; 5）    # 大于
+输出*（10 &lt; 5）    # 小于
+输出*（10 == 10）  # 等于
+输出*（10 != 5）   # 不等于
+输出*（10 &gt;= 10）  # 大于等于
+输出*（10 &lt;= 5）   # 小于等于
+</code></pre>
+		<h3>逻辑运算符</h3>
+		<pre><code class="language-cn">输出*（真 且 真）   # 逻辑与
+输出*（真 或 假）   # 逻辑或
+输出*（非 真）      # 逻辑非
+</code></pre>
+		<h3>成员运算符</h3>
+		<pre><code class="language-cn">列表 = 【1, 2, 3, 4, 5】
+输出*（3 在 列表中）
+输出*（10 在 列表中）
+</code></pre>
+		<h2>条件语句</h2>
+		<h3>如果...否则</h3>
+		<pre><code class="language-cn">年龄 = 20
+
+如果 年龄 &gt;= 18：
+    输出*（&quot;成年人&quot;）
+否则：
+    输出*（&quot;未成年人&quot;）
+</code></pre>
+		<h3>多条件判断</h3>
+		<pre><code class="language-cn">分数 = 85
+
+如果 分数 &gt;= 90：
+    输出*（&quot;优秀&quot;）
+另如 分数 &gt;= 80：
+    输出*（&quot;良好&quot;）
+另如 分数 &gt;= 60：
+    输出*（&quot;及格&quot;）
+否则：
+    输出*（&quot;不及格&quot;）
+</code></pre>
+		<h3>嵌套条件</h3>
+		<pre><code class="language-cn">年龄 = 25
+有票 = 真
+
+如果 年龄 &gt;= 18：
+    如果 有票：
+        输出*（&quot;可以入场&quot;）
+    否则：
+        输出*（&quot;需要购票&quot;）
+否则：
+    输出*（&quot;年龄不足&quot;）
+</code></pre>
+		<h2>循环语句</h2>
+		<h3>循环当</h3>
+		<pre><code class="language-cn">计数 = 0
+
+循环当 计数 &lt; 5：
+    输出*（计数）
+    计数 = 计数 + 1
+</code></pre>
+		<h3>遍历循环</h3>
+		<pre><code class="language-cn">遍历 我 在 区间*（5）：
+    输出*（我）
+</code></pre>
+		<h3>遍历列表</h3>
+		<pre><code class="language-cn">水果 = 【&quot;苹果&quot;, &quot;香蕉&quot;, &quot;橙子&quot;】
+
+遍历 水果名 在 水果：
+    输出*（水果名）
+</code></pre>
+		<h3>遍历字典</h3>
+		<pre><code class="language-cn">学生 = ｛&quot;姓名&quot;: &quot;张三&quot;, &quot;年龄&quot;: 20｝
+
+遍历 键 在 学生.取键（）：
+    输出*（键，学生【键】）
+</code></pre>
+		<h3>跳出和跳过</h3>
+		<pre><code class="language-cn">遍历 我 在 区间*（10）：
+    如果 我 == 3：
+        跳过
+    如果 我 == 7：
+        跳出
+    输出*（我）
+</code></pre>
+		<h2>函数</h2>
+		<h3>定义函数</h3>
+		<pre><code class="language-cn">定义 问候（名字）：
+    输出*（&quot;你好，&quot; + 名字）
+
+问候（&quot;张三&quot;）
+问候（&quot;李四&quot;）
+</code></pre>
+		<h3>返回值</h3>
+		<pre><code class="language-cn">定义 加法（a, b）：
+    返回 a + b
+
+结果 = 加法（10, 5）
+输出*（结果）
+</code></pre>
+		<h3>默认参数</h3>
+		<pre><code class="language-cn">定义 问候（名字, 问候语 = &quot;你好&quot;）：
+    输出*（问候语 + &quot;，&quot; + 名字）
+
+问候（&quot;张三&quot;）
+问候（&quot;李四&quot;, &quot;早上好&quot;）
+</code></pre>
+		<h3>可变参数</h3>
+		<pre><code class="language-cn">定义 求和（*参数）：
+    结果 = 0
+    遍历 数字 在 参数：
+        结果 = 结果 + 数字
+    返回 结果
+
+输出*（求和（1, 2, 3））
+输出*（求和（10, 20, 30, 40））
+</code></pre>
+		<h3>匿名函数</h3>
+		<pre><code class="language-cn">平方 = 匿名 x: x ** 2
+输出*（平方（5））
+
+加法 = 匿名 a, b: a + b
+输出*（加法（3, 4））
+</code></pre>
+		<h2>类和对象</h2>
+		<h3>定义类</h3>
+		<pre><code class="language-cn">类 动物：
+    定义 初始化（自身，名称，年龄）：
+        自身.名称 = 名称
+        自身.年龄 = 年龄
+    
+    定义 介绍（自身）：
+        输出*（&quot;我是&quot; + 自身.名称 + &quot;，今年&quot; + 转文本*（自身.年龄） + &quot;岁&quot;）
+
+狗 = 动物（&quot;旺财&quot;, 3）
+狗.介绍（）
+</code></pre>
+		<h3>继承</h3>
+		<pre><code class="language-cn">类 宠物（动物）：
+    定义 初始化（自身，名称，年龄，主人）：
+        父类（）.初始化（名称，年龄）
+        自身.主人 = 主人
+    
+    定义 介绍（自身）：
+        输出*（&quot;我是&quot; + 自身.名称 + &quot;，主人是&quot; + 自身.主人）
+
+猫 = 宠物（&quot;咪咪&quot;, 2, &quot;张三&quot;）
+猫.介绍（）
+</code></pre>
+		<h3>类方法</h3>
+		<pre><code class="language-cn">类 数学工具：
+    定义 加法（自身, a, b）：
+        返回 a + b
+    
+    定义 减法（自身, a, b）：
+        返回 a - b
+
+工具 = 数学工具（）
+输出*（工具.加法（10, 5））
+输出*（工具.减法（10, 5））
+</code></pre>
+		<h3>静态方法</h3>
+		<pre><code class="language-cn">类 工具：
+    定义 问候（）：
+        输出*（&quot;你好！&quot;）
+
+工具.问候（）
+</code></pre>
+		<h3>属性装饰器</h3>
+		<pre><code class="language-cn">类 温度：
+    定义 初始化（自身，摄氏度）：
+        自身._摄氏度 = 摄氏度
+    
+    属性
+    定义 华氏度（自身）：
+        返回 自身._摄氏度 * 9 / 5 + 32
+
+temp = 温度（100）
+输出*（temp.华氏度）
+</code></pre>
+		<h2>异常处理</h2>
+		<h3>尝试...捕获</h3>
+		<pre><code class="language-cn">尝试：
+    结果 = 10 / 0
+捕获 除零错误：
+    输出*（&quot;不能除以零！&quot;）
+</code></pre>
+		<h3>捕获多种异常</h3>
+		<pre><code class="language-cn">尝试：
+    数字 = 转整数*（&quot;abc&quot;）
+捕获 值错误：
+    输出*（&quot;无效的数值！&quot;）
+捕获 类型错误：
+    输出*（&quot;类型错误！&quot;）
+</code></pre>
+		<h3>收尾执行</h3>
+		<pre><code class="language-cn">尝试：
+    文件 = 打开*（&quot;测试.txt&quot;, &quot;r&quot;）
+    内容 = 文件.读取（）
+捕获 文件未找到错误：
+    输出*（&quot;文件不存在！&quot;）
+收尾：
+    输出*（&quot;执行完毕&quot;）
+</code></pre>
+		<h3>抛出异常</h3>
+		<pre><code class="language-cn">定义 检查年龄（年龄）：
+    如果 年龄 &lt; 0：
+        抛出 值错误（&quot;年龄不能为负数！&quot;）
+    如果 年龄 &gt; 150：
+        抛出 值错误（&quot;年龄不合理！&quot;）
+    输出*（&quot;年龄有效：&quot; + 转文本*（年龄））
+
+检查年龄（25）
+检查年龄（-5）
+</code></pre>
+		<h3>断言</h3>
+		<pre><code class="language-cn">年龄 = 25
+断言 年龄 &gt; 0, &quot;年龄必须为正数&quot;
+</code></pre>
+		<h2>文件操作</h2>
+		<h3>写入文件</h3>
+		<pre><code class="language-cn">文件 = 打开*（&quot;测试.txt&quot;, &quot;w&quot;）
+文件.写入（&quot;第一行\n&quot;）
+文件.写入（&quot;第二行\n&quot;）
+文件.关闭（）
+</code></pre>
+		<h3>读取文件</h3>
+		<pre><code class="language-cn">文件 = 打开*（&quot;测试.txt&quot;, &quot;r&quot;）
+内容 = 文件.读取（）
+输出*（内容）
+文件.关闭（）
+</code></pre>
+		<h3>逐行读取</h3>
+		<pre><code class="language-cn">文件 = 打开*（&quot;测试.txt&quot;, &quot;r&quot;）
+遍历 行 在 文件：
+    输出*（行）
+文件.关闭（）
+</code></pre>
+		<h3>追加内容</h3>
+		<pre><code class="language-cn">文件 = 打开*（&quot;测试.txt&quot;, &quot;a&quot;）
+文件.写入（&quot;追加的内容\n&quot;）
+文件.关闭（）
+</code></pre>
+		<h2>模块导入</h2>
+		<h3>引入整个模块</h3>
+		<pre><code class="language-cn">引入 数学
+
+输出*（数学.圆周率）
+输出*（数学.平方根（16））
+</code></pre>
+		<h3>引入特定函数</h3>
+		<pre><code class="language-cn">来自 数学 引入 圆周率, 平方根
+
+输出*（圆周率）
+输出*（平方根（16））
+</code></pre>
+		<h3>引入并别名</h3>
+		<pre><code class="language-cn">引入 数学 简称 m
+
+输出*（m.圆周率）
+输出*（m.平方根（25））
+</code></pre>
+		<h2>列表操作</h2>
+		<h3>基本操作</h3>
+		<pre><code class="language-cn">列表 = 【1, 2, 3】
+列表.追加（4）
+输出*（列表）
+
+列表.插入（0, 0）
+输出*（列表）
+
+列表.删除（2）
+输出*（列表）
+
+元素 = 列表.弹出（）
+输出*（元素）
+输出*（列表）
+</code></pre>
+		<h3>列表方法</h3>
+		<pre><code class="language-cn">数字 = 【3, 1, 4, 1, 5, 9, 2, 6】
+
+输出*（数字.计数（1））    # 计数
+输出*（数字.索引（4））    # 查找索引
+
+数字.排序（）
+输出*（数字）
+
+数字.反转（）
+输出*（数字）
+</code></pre>
+		<h3>列表推导式</h3>
+		<pre><code class="language-cn">平方 = 【x ** 2 遍历 x 在 区间*（10）】
+输出*（平方）
+
+偶数 = 【x 遍历 x 在 区间*（20） 如果 x % 2 == 0】
+输出*（偶数）
+</code></pre>
+		<h2>字典操作</h2>
+		<h3>基本操作</h3>
+		<pre><code class="language-cn">学生 = ｛｝
+学生【&quot;姓名&quot;】 = &quot;张三&quot;
+学生【&quot;年龄&quot;】 = 20
+学生【&quot;成绩&quot;】 = 95
+
+输出*（学生）
+输出*（学生.取键（））
+输出*（学生.取值（））
+输出*（学生.取项（））
+</code></pre>
+		<h3>字典方法</h3>
+		<pre><code class="language-cn">学生 = ｛&quot;姓名&quot;: &quot;张三&quot;, &quot;年龄&quot;: 20｝
+
+输出*（学生.获取（&quot;姓名&quot;））
+输出*（学生.获取（&quot;地址&quot;, &quot;未知&quot;））
+
+学生.更新（｛&quot;成绩&quot;: 95｝）
+输出*（学生）
+
+姓名 = 学生.弹出（&quot;姓名&quot;）
+输出*（姓名）
+输出*（学生）
+</code></pre>
+		<h3>字典推导式</h3>
+		<pre><code class="language-cn">平方 = ｛x: x ** 2 遍历 x 在 区间*（5）｝
+输出*（平方）
+</code></pre>
+		<h2>集合操作</h2>
+		<h3>基本操作</h3>
+		<pre><code class="language-cn">集合 = ｛1, 2, 3, 4, 5｝
+集合.添加（6）
+输出*（集合）
+
+集合.丢弃（3）
+输出*（集合）
+</code></pre>
+		<h3>集合运算</h3>
+		<pre><code class="language-cn">a = ｛1, 2, 3, 4, 5｝
+b = ｛4, 5, 6, 7, 8｝
+
+输出*（a.并集（b））          # 并集
+输出*（a.交集（b））          # 交集
+输出*（a.差集（b））          # 差集
+</code></pre>
+		<h2>字符串操作</h2>
+		<h3>基本方法</h3>
+		<pre><code class="language-cn">文本 = &quot;Hello World&quot;
+
+输出*（文本.大写（））
+输出*（文本.小写（））
+</code></pre>
+		<h3>查找和替换</h3>
+		<pre><code class="language-cn">文本 = &quot;Hello World&quot;
+
+输出*（文本.查找（&quot;World&quot;））
+输出*（文本.替换（&quot;World&quot;, &quot;Python&quot;））
+</code></pre>
+		<h3>分割和连接</h3>
+		<pre><code class="language-cn">文本 = &quot;苹果,香蕉,橙子&quot;
+列表 = 文本.分割（&quot;,&quot;）
+输出*（列表）
+
+连接 = &quot;-&quot;.连接（列表）
+输出*（连接）
+</code></pre>
+		<h3>去除空白</h3>
+		<pre><code class="language-cn">文本 = &quot;  Hello  &quot;
+输出*（文本.去空格（））
+</code></pre>
+		<h3>检查方法</h3>
+		<pre><code class="language-cn">文本 = &quot;Hello123&quot;
+
+输出*（文本.开头匹配（&quot;Hello&quot;））
+输出*（文本.结尾匹配（&quot;World&quot;））
+</code></pre>
+		<h2>内置函数</h2>
+		<h3>类型转换</h3>
+		<pre><code class="language-cn">输出*（转整数*（&quot;123&quot;））
+输出*（转小数*（&quot;3.14&quot;））
+输出*（转文本*（123））
+输出*（列表*（&quot;abc&quot;））
+输出*（元组*（【1, 2, 3】））
+输出*（集合*（【1, 2, 2, 3】））
+</code></pre>
+		<h3>数学函数</h3>
+		<pre><code class="language-cn">输出*（绝对值*（-10））
+输出*（最大*（1, 2, 3））
+输出*（最小*（1, 2, 3））
+输出*（求和*（【1, 2, 3, 4, 5】））
+输出*（次方*（2, 3））
+输出*（商余*（10, 3））
+输出*（取整*（3.14159, 2））
+</code></pre>
+		<h3>序列函数</h3>
+		<pre><code class="language-cn">输出*（区间*（5））
+输出*（长度*（&quot;Hello&quot;））
+输出*（序遍历*（【&quot;a&quot;, &quot;b&quot;, &quot;c&quot;】））
+输出*（排序*（【3, 1, 4, 1, 5】））
+输出*（反转*（【1, 2, 3】））
+输出*（配对*（【1, 2】, 【&quot;a&quot;, &quot;b&quot;】））
+</code></pre>
+		<h3>函数式编程</h3>
+		<pre><code class="language-cn">输出*（映射*（匿名 x: x ** 2, 【1, 2, 3】））
+输出*（筛选*（匿名 x: x &gt; 2, 【1, 2, 3, 4, 5】））
+</code></pre>
+		<h3>逻辑函数</h3>
+		<pre><code class="language-cn">输出*（任一真*（【假, 假, 真】））
+输出*（全成立*（【真, 真, 真】））
+</code></pre>
+		<h3>类型检查</h3>
+		<pre><code class="language-cn">输出*（类型*（123））
+输出*（类型*（&quot;abc&quot;））
+输出*（类型*（【1, 2, 3】））
+
+输出*（属类型*（123, 整数））
+输出*（属类型*（&quot;abc&quot;, 字符串））
+</code></pre>
+		<h3>其他函数</h3>
+		<pre><code class="language-cn">输出*（哈希*（&quot;test&quot;））
+输出*（字符*（65））
+输出*（编码*（&quot;A&quot;））
+</code></pre>
+		<h2>高级特性</h2>
+		<h3>产出（生成器）</h3>
+		<pre><code class="language-cn">定义 计数到（n）：
+    计数 = 0
+    循环当 计数 &lt; n：
+        产出 计数
+        计数 = 计数 + 1
+
+遍历 数字 在 计数到（5）：
+    输出*（数字）
+</code></pre>
+		<h3>装饰器</h3>
+		<pre><code class="language-cn">定义 日志（函数）：
+    定义 包装（*参数, **关键字参数）：
+        输出*（&quot;调用函数：&quot; + 函数.名称）
+        返回 函数（*参数, **关键字参数）
+    返回 包装
+
+@日志
+定义 问候（名字）：
+    输出*（&quot;你好，&quot; + 名字）
+
+问候（&quot;张三&quot;）
+</code></pre>
+		<h3>使用语句（上下文管理器）</h3>
+		<pre><code class="language-cn">使用 打开*（&quot;测试.txt&quot;, &quot;r&quot;） 简称 f：
+    输出*（f.读取（））
+</code></pre>
+		<h3>异步编程</h3>
+		<pre><code class="language-cn">异步 定义 获取数据（）：
+    输出*（&quot;开始获取&quot;）
+    等待 延迟（1）
+    输出*（&quot;获取完成&quot;）
+    返回 &quot;数据&quot;
+
+异步 定义 主函数（）：
+    结果 = 等待 获取数据（）
+    输出*（结果）
+</code></pre>
+		<h3>占位语句</h3>
+		<pre><code class="language-cn">定义 待实现（）：
+    占位
+</code></pre>
+		<h3>全局变量</h3>
+		<pre><code class="language-cn">定义 修改全局（）：
+    全局 计数器
+    计数器 = 计数器 + 1
+
+计数器 = 0
+修改全局（）
+输出*（计数器）
+</code></pre>
+		<h3>外层变量</h3>
+		<pre><code class="language-cn">定义 外层（）：
+    计数 = 0
+    定义 内层（）：
+        外层 计数
+        计数 = 计数 + 1
+    内层（）
+    输出*（计数）
+
+外层（）
+</code></pre>
+		<h2>关键字速查表</h2>
+		<table>
+			<thead>
+			<tr>
+				<th>中文关键字</th>
+				<th>说明</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td>如果</td>
+				<td>条件判断</td>
+			</tr>
+			<tr>
+				<td>另如</td>
+				<td>多条件分支</td>
+			</tr>
+			<tr>
+				<td>否则</td>
+				<td>条件分支</td>
+			</tr>
+			<tr>
+				<td>匹配</td>
+				<td>模式匹配</td>
+			</tr>
+			<tr>
+				<td>分支</td>
+				<td>匹配分支</td>
+			</tr>
+			<tr>
+				<td>遍历</td>
+				<td>遍历循环</td>
+			</tr>
+			<tr>
+				<td>循环当</td>
+				<td>while循环</td>
+			</tr>
+			<tr>
+				<td>跳出</td>
+				<td>中断循环</td>
+			</tr>
+			<tr>
+				<td>跳过</td>
+				<td>继续循环</td>
+			</tr>
+			<tr>
+				<td>占位</td>
+				<td>空语句</td>
+			</tr>
+			<tr>
+				<td>定义</td>
+				<td>定义函数</td>
+			</tr>
+			<tr>
+				<td>返回</td>
+				<td>返回值</td>
+			</tr>
+			<tr>
+				<td>产出</td>
+				<td>生成器产出</td>
+			</tr>
+			<tr>
+				<td>匿名</td>
+				<td>匿名函数</td>
+			</tr>
+			<tr>
+				<td>全局</td>
+				<td>全局变量</td>
+			</tr>
+			<tr>
+				<td>外层</td>
+				<td>外层变量</td>
+			</tr>
+			<tr>
+				<td>类</td>
+				<td>定义类</td>
+			</tr>
+			<tr>
+				<td>自身</td>
+				<td>self引用</td>
+			</tr>
+			<tr>
+				<td>父类</td>
+				<td>super引用</td>
+			</tr>
+			<tr>
+				<td>引入</td>
+				<td>导入模块</td>
+			</tr>
+			<tr>
+				<td>来自</td>
+				<td>从模块导入</td>
+			</tr>
+			<tr>
+				<td>简称</td>
+				<td>别名</td>
+			</tr>
+			<tr>
+				<td>尝试</td>
+				<td>异常捕获开始</td>
+			</tr>
+			<tr>
+				<td>捕获</td>
+				<td>捕获异常</td>
+			</tr>
+			<tr>
+				<td>收尾</td>
+				<td>最终执行</td>
+			</tr>
+			<tr>
+				<td>抛出</td>
+				<td>抛出异常</td>
+			</tr>
+			<tr>
+				<td>断言</td>
+				<td>断言检查</td>
+			</tr>
+			<tr>
+				<td>非</td>
+				<td>逻辑非</td>
+			</tr>
+			<tr>
+				<td>且</td>
+				<td>逻辑与</td>
+			</tr>
+			<tr>
+				<td>或</td>
+				<td>逻辑或</td>
+			</tr>
+			<tr>
+				<td>真</td>
+				<td>True</td>
+			</tr>
+			<tr>
+				<td>假</td>
+				<td>False</td>
+			</tr>
+			<tr>
+				<td>空</td>
+				<td>None</td>
+			</tr>
+			<tr>
+				<td>在</td>
+				<td>成员检查</td>
+			</tr>
+			<tr>
+				<td>是</td>
+				<td>身份比较</td>
+			</tr>
+			<tr>
+				<td>使用</td>
+				<td>上下文管理</td>
+			</tr>
+			<tr>
+				<td>异步</td>
+				<td>异步函数</td>
+			</tr>
+			<tr>
+				<td>等待</td>
+				<td>等待异步</td>
+			</tr>
+			</tbody>
+		</table>
+		<h2>内置函数速查表</h2>
+		<table>
+			<thead>
+			<tr>
+				<th>中文函数</th>
+				<th>说明</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td>输出*</td>
+				<td>输出内容</td>
+			</tr>
+			<tr>
+				<td>输入*</td>
+				<td>获取输入</td>
+			</tr>
+			<tr>
+				<td>区间*</td>
+				<td>生成序列</td>
+			</tr>
+			<tr>
+				<td>长度*</td>
+				<td>获取长度</td>
+			</tr>
+			<tr>
+				<td>最大*</td>
+				<td>获取最大值</td>
+			</tr>
+			<tr>
+				<td>最小*</td>
+				<td>获取最小值</td>
+			</tr>
+			<tr>
+				<td>求和*</td>
+				<td>求和</td>
+			</tr>
+			<tr>
+				<td>绝对值*</td>
+				<td>获取绝对值</td>
+			</tr>
+			<tr>
+				<td>取整*</td>
+				<td>四舍五入</td>
+			</tr>
+			<tr>
+				<td>次方*</td>
+				<td>幂运算</td>
+			</tr>
+			<tr>
+				<td>商余*</td>
+				<td>商和余数</td>
+			</tr>
+			<tr>
+				<td>复数*</td>
+				<td>复数对象</td>
+			</tr>
+			<tr>
+				<td>转整数*</td>
+				<td>转换为整数</td>
+			</tr>
+			<tr>
+				<td>转小数*</td>
+				<td>转换为浮点数</td>
+			</tr>
+			<tr>
+				<td>转文本*</td>
+				<td>转换为字符串</td>
+			</tr>
+			<tr>
+				<td>转布尔*</td>
+				<td>转换为布尔值</td>
+			</tr>
+			<tr>
+				<td>列表*</td>
+				<td>转换为列表</td>
+			</tr>
+			<tr>
+				<td>元组*</td>
+				<td>转换为元组</td>
+			</tr>
+			<tr>
+				<td>字典*</td>
+				<td>转换为字典</td>
+			</tr>
+			<tr>
+				<td>集合*</td>
+				<td>转换为集合</td>
+			</tr>
+			<tr>
+				<td>字符*</td>
+				<td>字符编码转字符</td>
+			</tr>
+			<tr>
+				<td>编码*</td>
+				<td>字符转编码</td>
+			</tr>
+			<tr>
+				<td>序遍历*</td>
+				<td>枚举索引</td>
+			</tr>
+			<tr>
+				<td>配对*</td>
+				<td>压缩多个序列</td>
+			</tr>
+			<tr>
+				<td>排序*</td>
+				<td>排序</td>
+			</tr>
+			<tr>
+				<td>反转*</td>
+				<td>反转序列</td>
+			</tr>
+			<tr>
+				<td>映射*</td>
+				<td>映射函数</td>
+			</tr>
+			<tr>
+				<td>筛选*</td>
+				<td>过滤序列</td>
+			</tr>
+			<tr>
+				<td>迭代器*</td>
+				<td>创建迭代器</td>
+			</tr>
+			<tr>
+				<td>下一项*</td>
+				<td>下一个元素</td>
+			</tr>
+			<tr>
+				<td>全成立*</td>
+				<td>全部为真</td>
+			</tr>
+			<tr>
+				<td>任一真*</td>
+				<td>任意为真</td>
+			</tr>
+			<tr>
+				<td>类型*</td>
+				<td>获取类型</td>
+			</tr>
+			<tr>
+				<td>属类型*</td>
+				<td>类型检查</td>
+			</tr>
+			<tr>
+				<td>哈希*</td>
+				<td>获取哈希值</td>
+			</tr>
+			<tr>
+				<td>打开*</td>
+				<td>打开文件</td>
+			</tr>
+			<tr>
+				<td>执行码*</td>
+				<td>执行代码</td>
+			</tr>
+			</tbody>
+		</table>
+		<h2>对象方法速查表</h2>
+		<table>
+			<thead>
+			<tr>
+				<th>中文方法</th>
+				<th>说明</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td>追加</td>
+				<td>列表追加元素</td>
+			</tr>
+			<tr>
+				<td>插入</td>
+				<td>列表插入元素</td>
+			</tr>
+			<tr>
+				<td>弹出</td>
+				<td>弹出元素</td>
+			</tr>
+			<tr>
+				<td>删除</td>
+				<td>移除元素</td>
+			</tr>
+			<tr>
+				<td>清空</td>
+				<td>清空列表</td>
+			</tr>
+			<tr>
+				<td>反转</td>
+				<td>反转列表</td>
+			</tr>
+			<tr>
+				<td>排序</td>
+				<td>列表排序</td>
+			</tr>
+			<tr>
+				<td>计数</td>
+				<td>计数元素</td>
+			</tr>
+			<tr>
+				<td>扩展</td>
+				<td>列表扩展</td>
+			</tr>
+			<tr>
+				<td>索引</td>
+				<td>查找索引</td>
+			</tr>
+			<tr>
+				<td>取键</td>
+				<td>字典键</td>
+			</tr>
+			<tr>
+				<td>取值</td>
+				<td>字典值</td>
+			</tr>
+			<tr>
+				<td>取项</td>
+				<td>字典项</td>
+			</tr>
+			<tr>
+				<td>更新</td>
+				<td>字典更新</td>
+			</tr>
+			<tr>
+				<td>获取</td>
+				<td>字典获取</td>
+			</tr>
+			<tr>
+				<td>设默认</td>
+				<td>设置默认值</td>
+			</tr>
+			<tr>
+				<td>分割</td>
+				<td>字符串分割</td>
+			</tr>
+			<tr>
+				<td>连接</td>
+				<td>字符串连接</td>
+			</tr>
+			<tr>
+				<td>替换</td>
+				<td>字符串替换</td>
+			</tr>
+			<tr>
+				<td>查找</td>
+				<td>字符串查找</td>
+			</tr>
+			<tr>
+				<td>大写</td>
+				<td>转大写</td>
+			</tr>
+			<tr>
+				<td>小写</td>
+				<td>转小写</td>
+			</tr>
+			<tr>
+				<td>去空格</td>
+				<td>去除两端空白</td>
+			</tr>
+			<tr>
+				<td>开头匹配</td>
+				<td>检查开头</td>
+			</tr>
+			<tr>
+				<td>结尾匹配</td>
+				<td>检查结尾</td>
+			</tr>
+			<tr>
+				<td>读取</td>
+				<td>文件读取</td>
+			</tr>
+			<tr>
+				<td>读取行</td>
+				<td>文件读取行</td>
+			</tr>
+			<tr>
+				<td>写入</td>
+				<td>文件写入</td>
+			</tr>
+			<tr>
+				<td>关闭</td>
+				<td>文件关闭</td>
+			</tr>
+			<tr>
+				<td>添加</td>
+				<td>集合添加</td>
+			</tr>
+			<tr>
+				<td>丢弃</td>
+				<td>集合丢弃</td>
+			</tr>
+			<tr>
+				<td>交集</td>
+				<td>集合交集</td>
+			</tr>
+			<tr>
+				<td>并集</td>
+				<td>集合并集</td>
+			</tr>
+			<tr>
+				<td>差集</td>
+				<td>集合差集</td>
+			</tr>
+			</tbody>
+		</table>
+		<h2>标准库速查表</h2>
+		<h3>数学库</h3>
+		<table>
+			<thead>
+			<tr>
+				<th>中文函数</th>
+				<th>说明</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td>圆周率</td>
+				<td>π值</td>
+			</tr>
+			<tr>
+				<td>自然常数</td>
+				<td>e值</td>
+			</tr>
+			<tr>
+				<td>平方根</td>
+				<td>平方根</td>
+			</tr>
+			<tr>
+				<td>平方</td>
+				<td>幂运算</td>
+			</tr>
+			<tr>
+				<td>正弦</td>
+				<td>sin</td>
+			</tr>
+			<tr>
+				<td>余弦</td>
+				<td>cos</td>
+			</tr>
+			<tr>
+				<td>正切</td>
+				<td>tan</td>
+			</tr>
+			<tr>
+				<td>反正弦</td>
+				<td>asin</td>
+			</tr>
+			<tr>
+				<td>反余弦</td>
+				<td>acos</td>
+			</tr>
+			<tr>
+				<td>反正切</td>
+				<td>atan</td>
+			</tr>
+			<tr>
+				<td>弧度转角度</td>
+				<td>degrees</td>
+			</tr>
+			<tr>
+				<td>角度转弧度</td>
+				<td>radians</td>
+			</tr>
+			<tr>
+				<td>自然对数</td>
+				<td>log</td>
+			</tr>
+			<tr>
+				<td>常用对数</td>
+				<td>log10</td>
+			</tr>
+			<tr>
+				<td>上取整</td>
+				<td>ceil</td>
+			</tr>
+			<tr>
+				<td>下取整</td>
+				<td>floor</td>
+			</tr>
+			<tr>
+				<td>浮点绝对值</td>
+				<td>fabs</td>
+			</tr>
+			<tr>
+				<td>取模</td>
+				<td>fmod</td>
+			</tr>
+			<tr>
+				<td>阶乘</td>
+				<td>factorial</td>
+			</tr>
+			<tr>
+				<td>最大公约数</td>
+				<td>gcd</td>
+			</tr>
+			<tr>
+				<td>欧拉伽马</td>
+				<td>gamma</td>
+			</tr>
+			<tr>
+				<td>双曲正弦</td>
+				<td>sinh</td>
+			</tr>
+			<tr>
+				<td>双曲余弦</td>
+				<td>cosh</td>
+			</tr>
+			</tbody>
+		</table>
+		<h3>随机库</h3>
+		<table>
+			<thead>
+			<tr>
+				<th>中文函数</th>
+				<th>说明</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td>随机整数</td>
+				<td>randint</td>
+			</tr>
+			<tr>
+				<td>零一小数</td>
+				<td>random</td>
+			</tr>
+			<tr>
+				<td>区间小数</td>
+				<td>uniform</td>
+			</tr>
+			<tr>
+				<td>种子</td>
+				<td>seed</td>
+			</tr>
+			<tr>
+				<td>抽取一项</td>
+				<td>choice</td>
+			</tr>
+			<tr>
+				<td>多项抽样</td>
+				<td>sample</td>
+			</tr>
+			<tr>
+				<td>打乱序列</td>
+				<td>shuffle</td>
+			</tr>
+			<tr>
+				<td>随机偏移</td>
+				<td>randrange</td>
+			</tr>
+			</tbody>
+		</table>
+		<h3>系统库</h3>
+		<table>
+			<thead>
+			<tr>
+				<th>中文函数</th>
+				<th>说明</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td>系统当前路径</td>
+				<td>getcwd</td>
+			</tr>
+			<tr>
+				<td>切换路径</td>
+				<td>chdir</td>
+			</tr>
+			<tr>
+				<td>建单文件夹</td>
+				<td>mkdir</td>
+			</tr>
+			<tr>
+				<td>递归建文件夹</td>
+				<td>makedirs</td>
+			</tr>
+			<tr>
+				<td>删空文件夹</td>
+				<td>rmdir</td>
+			</tr>
+			<tr>
+				<td>删文件</td>
+				<td>remove</td>
+			</tr>
+			<tr>
+				<td>重命名</td>
+				<td>rename</td>
+			</tr>
+			<tr>
+				<td>列出目录内容</td>
+				<td>listdir</td>
+			</tr>
+			<tr>
+				<td>执行系统命令</td>
+				<td>system</td>
+			</tr>
+			<tr>
+				<td>路径拼接</td>
+				<td>path.join</td>
+			</tr>
+			<tr>
+				<td>路径存在</td>
+				<td>path.exists</td>
+			</tr>
+			<tr>
+				<td>路径是文件</td>
+				<td>path.isfile</td>
+			</tr>
+			<tr>
+				<td>路径是目录</td>
+				<td>path.isdir</td>
+			</tr>
+			<tr>
+				<td>获取文件大小</td>
+				<td>path.getsize</td>
+			</tr>
+			<tr>
+				<td>获取文件名</td>
+				<td>path.basename</td>
+			</tr>
+			<tr>
+				<td>获取父路径</td>
+				<td>path.dirname</td>
+			</tr>
+			</tbody>
+		</table>
+		<h3>路径库</h3>
+		<table>
+			<thead>
+			<tr>
+				<th>中文函数</th>
+				<th>说明</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td>路径对象</td>
+				<td>Path</td>
+			</tr>
+			<tr>
+				<td>是否文件</td>
+				<td>is_file</td>
+			</tr>
+			<tr>
+				<td>是否目录</td>
+				<td>is_dir</td>
+			</tr>
+			<tr>
+				<td>是否存在</td>
+				<td>exists</td>
+			</tr>
+			<tr>
+				<td>创建目录</td>
+				<td>mkdir</td>
+			</tr>
+			<tr>
+				<td>删除文件</td>
+				<td>unlink</td>
+			</tr>
+			<tr>
+				<td>遍历子文件</td>
+				<td>iterdir</td>
+			</tr>
+			<tr>
+				<td>全局匹配文件</td>
+				<td>glob</td>
+			</tr>
+			<tr>
+				<td>父目录</td>
+				<td>parent</td>
+			</tr>
+			<tr>
+				<td>文件名</td>
+				<td>name</td>
+			</tr>
+			<tr>
+				<td>后缀名</td>
+				<td>suffix</td>
+			</tr>
+			<tr>
+				<td>绝对路径</td>
+				<td>absolute</td>
+			</tr>
+			</tbody>
+		</table>
+		<h3>时间库</h3>
+		<table>
+			<thead>
+			<tr>
+				<th>中文函数</th>
+				<th>说明</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td>延时</td>
+				<td>sleep</td>
+			</tr>
+			<tr>
+				<td>时间戳</td>
+				<td>time</td>
+			</tr>
+			<tr>
+				<td>本地时间结构</td>
+				<td>localtime</td>
+			</tr>
+			<tr>
+				<td>格式化时间</td>
+				<td>strftime</td>
+			</tr>
+			<tr>
+				<td>文本转时间戳</td>
+				<td>strptime</td>
+			</tr>
+			<tr>
+				<td>UTC时间</td>
+				<td>gmtime</td>
+			</tr>
+			</tbody>
+		</table>
+		<h3>日期时间库</h3>
+		<table>
+			<thead>
+			<tr>
+				<th>中文函数</th>
+				<th>说明</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td>当前时间</td>
+				<td>datetime.now</td>
+			</tr>
+			<tr>
+				<td>UTC当前时间</td>
+				<td>datetime.utcnow</td>
+			</tr>
+			<tr>
+				<td>构造时间</td>
+				<td>datetime</td>
+			</tr>
+			<tr>
+				<td>时间差</td>
+				<td>timedelta</td>
+			</tr>
+			<tr>
+				<td>文本转时间</td>
+				<td>datetime.strptime</td>
+			</tr>
+			<tr>
+				<td>替换年月日</td>
+				<td>replace</td>
+			</tr>
+			<tr>
+				<td>获取时间戳</td>
+				<td>timestamp</td>
+			</tr>
+			<tr>
+				<td>今日日期</td>
+				<td>date.today</td>
+			</tr>
+			</tbody>
+		</table>
+		<h3>画笔库</h3>
+		<table>
+			<thead>
+			<tr>
+				<th>中文函数</th>
+				<th>说明</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td>前进</td>
+				<td>forward</td>
+			</tr>
+			<tr>
+				<td>后退</td>
+				<td>backward</td>
+			</tr>
+			<tr>
+				<td>右转</td>
+				<td>right</td>
+			</tr>
+			<tr>
+				<td>左转</td>
+				<td>left</td>
+			</tr>
+			<tr>
+				<td>移动到</td>
+				<td>goto</td>
+			</tr>
+			<tr>
+				<td>设朝向</td>
+				<td>setheading</td>
+			</tr>
+			<tr>
+				<td>画圆</td>
+				<td>circle</td>
+			</tr>
+			<tr>
+				<td>画点</td>
+				<td>dot</td>
+			</tr>
+			<tr>
+				<td>回原点</td>
+				<td>home</td>
+			</tr>
+			<tr>
+				<td>抬笔</td>
+				<td>penup</td>
+			</tr>
+			<tr>
+				<td>落笔</td>
+				<td>pendown</td>
+			</tr>
+			<tr>
+				<td>设粗细</td>
+				<td>pensize</td>
+			</tr>
+			<tr>
+				<td>设颜色</td>
+				<td>pencolor</td>
+			</tr>
+			<tr>
+				<td>设填充色</td>
+				<td>fillcolor</td>
+			</tr>
+			<tr>
+				<td>开始填充</td>
+				<td>begin_fill</td>
+			</tr>
+			<tr>
+				<td>结束填充</td>
+				<td>end_fill</td>
+			</tr>
+			<tr>
+				<td>设速度</td>
+				<td>speed</td>
+			</tr>
+			<tr>
+				<td>隐藏</td>
+				<td>hideturtle</td>
+			</tr>
+			<tr>
+				<td>显示</td>
+				<td>showturtle</td>
+			</tr>
+			<tr>
+				<td>设形状</td>
+				<td>shape</td>
+			</tr>
+			<tr>
+				<td>撤销一步</td>
+				<td>undo</td>
+			</tr>
+			<tr>
+				<td>盖章</td>
+				<td>stamp</td>
+			</tr>
+			<tr>
+				<td>写文字</td>
+				<td>write</td>
+			</tr>
+			<tr>
+				<td>当前位置</td>
+				<td>position</td>
+			</tr>
+			<tr>
+				<td>X坐标</td>
+				<td>xcor</td>
+			</tr>
+			<tr>
+				<td>Y坐标</td>
+				<td>ycor</td>
+			</tr>
+			<tr>
+				<td>当前朝向</td>
+				<td>heading</td>
+			</tr>
+			<tr>
+				<td>是否落笔</td>
+				<td>isdown</td>
+			</tr>
+			<tr>
+				<td>到某点距离</td>
+				<td>distance</td>
+			</tr>
+			<tr>
+				<td>设窗口标题</td>
+				<td>title</td>
+			</tr>
+			<tr>
+				<td>设背景色</td>
+				<td>bgcolor</td>
+			</tr>
+			<tr>
+				<td>设窗口大小</td>
+				<td>setup</td>
+			</tr>
+			<tr>
+				<td>清空画面</td>
+				<td>clear</td>
+			</tr>
+			<tr>
+				<td>重置</td>
+				<td>reset</td>
+			</tr>
+			<tr>
+				<td>设刷新模式</td>
+				<td>tracer</td>
+			</tr>
+			<tr>
+				<td>刷新画面</td>
+				<td>update</td>
+			</tr>
+			<tr>
+				<td>结束绘图</td>
+				<td>done</td>
+			</tr>
+			<tr>
+				<td>点击退出</td>
+				<td>exitonclick</td>
+			</tr>
+			</tbody>
+		</table>
+		<h2>标点符号速查表</h2>
+		<table>
+			<thead>
+			<tr>
+				<th>中文标点</th>
+				<th>英文标点</th>
+				<th>说明</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td>（ ）</td>
+				<td>( )</td>
+				<td>圆括号</td>
+			</tr>
+			<tr>
+				<td>：</td>
+				<td>:</td>
+				<td>冒号</td>
+			</tr>
+			<tr>
+				<td>；</td>
+				<td>;</td>
+				<td>分号</td>
+			</tr>
+			<tr>
+				<td>，</td>
+				<td>,</td>
+				<td>逗号</td>
+			</tr>
+			<tr>
+				<td>&#39; &#39;</td>
+				<td>&#39; &#39;</td>
+				<td>单引号</td>
+			</tr>
+			<tr>
+				<td>【 】</td>
+				<td>[ ]</td>
+				<td>方括号</td>
+			</tr>
+			<tr>
+				<td>？</td>
+				<td>?</td>
+				<td>问号</td>
+			</tr>
+			<tr>
+				<td>！</td>
+				<td>!</td>
+				<td>叹号</td>
+			</tr>
+			<tr>
+				<td>&quot; &quot;</td>
+				<td>&quot; &quot;</td>
+				<td>双引号</td>
+			</tr>
+			</tbody>
+		</table>
+	
+	</div>
+</body>
+</html>
